@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>Clientes</h1>
+<br/>
+
+<a href="{% url 'crear_cliente' %}">Crear Cliente</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Documento</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for cliente in clientes %}
+        <tr>
+          <th>{{ cliente.tipo_documento }} - {{ cliente.num_documento }}</th>
+          <td>{{ cliente.nombre }}</td>
+          <td>{{ cliente.email }}</td>
+          <td><a href="{% url 'modificar_cliente' id=cliente.id %}">Modificar</a></td>
+          <td><a href="{% url 'eliminar_cliente' id=cliente.id %}">Eliminar</a></td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
