@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>Productos</h1>
+<br/>
+
+<a href="{% url 'crear_producto' %}">Crear Producto</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Código</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Cliente</th>
+      <th scope="col">Precio</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for producto in productos %}
+        <tr>
+          <th>{{ producto.codigo }}</th>
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.cantidad }}</td>
+          <td>{{ producto.cliente }}</td>
+          <td>{{ producto.precio }}</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

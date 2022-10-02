@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<br/>
+{% if registro_form.errors %}
+    <div class="alert alert-danger" role="alert">
+      {{ registro_form.errors }}
+    </div>
+{% endif %}
+<form method="post" action="">
+    {% csrf_token %}
+    {{ registro_form.as_p }}
+    <input type="submit" value="Registrarse"/>
+</form>
+{% endblock %}
+
+

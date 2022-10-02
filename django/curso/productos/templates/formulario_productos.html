@@ -6,20 +6,24 @@
     <br/>
     <form method="post" action="">
         {% csrf_token %}
-        {{ form.nombre.label }}
-        {{ form.nombre }}
         <div class="row">
             <div class="col-md-6">
-                {{ form.tipo_documento.label }}
-                {{ form.tipo_documento }}
+                {{ form.codigo.label }}
+                {{ form.codigo }}
+                {{ form.nombre.label }}
+                {{ form.nombre }}
+                {{ form.cliente.label }}
+                {{ form.cliente }}
             </div>
             <div class="col-md-6">
-                {{ form.num_documento.label }}
-                {{ form.num_documento }}
+                {{ form.imagen.label }}
+                {{ form.imagen }}
+                {{ form.cantidad.label }}
+                {{ form.cantidad }}
+                {{ form.precio.label }}
+                {{ form.precio }}
             </div>
         </div>
-        {{ form.email.label }}
-        {{ form.email }}
         {{ form.descripcion.label }}
         {{ form.descripcion }}
         <br/>

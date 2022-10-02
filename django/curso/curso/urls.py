@@ -15,12 +15,28 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from ingreso import views as vi
 from clientes import views as vc
+from productos import views as vp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #Ingreso
+    path('register/', vi.register_user, name='register_user'),
+    path('login/', vi.login_page, name='login_page'),
+    path('logout/', vi.logout_user, name='logout_page'),
+    #Clientes
     path('index_cliente/', vc.index, name='index_cliente'),
     path('crear_cliente/', vc.crear_cliente, name='crear_cliente'),
     path('modificar_cliente/<int:id>', vc.modificar_cliente, name='modificar_cliente'),
     path('eliminar_cliente/<int:id>', vc.eliminar_cliente, name='eliminar_cliente'),
+    #Productos
+    path('index_producto/', vp.index_producto, name='index_producto'),
+    path('crear_producto/', vp.crear_producto, name='crear_producto'),
+
 ]
+
+#Ajuste Portal Administración
+admin.site.site_title = 'Administración Curso Python'
+admin.site.site_header = 'Administración Curso Python'
+admin.site.index_title = 'Panel de gestión'
