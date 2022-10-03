@@ -1,10 +1,14 @@
 {% extends 'layout.html' %}
-
+{% block title %}
+<div class="row">
+  <div class="d-flex justify-content-start" style="float:left;">
+    <h3>{{ title }}</h3>
+  </div>
+</div>
+{% endblock %}
 {% block content %}
 <div style="width:80%;margin: 0 auto; margin-top:30px;">
-    <h3>{{ title }}</h3>
-    <br/>
-    <form method="post" action="">
+    <form method="post" action="" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row">
             <div class="col-md-6">

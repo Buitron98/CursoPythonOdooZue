@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+{% block title %}
+<div class="row">
+  <div class="d-flex justify-content-start" style="float:left;">
+    <h3>{{ title }}</h3>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+<div style="width:80%;margin: 0 auto; margin-top:30px;">
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.rel_cliente.label }}
+                {{ form.rel_cliente }}
+                {{ form.fecha_factura.label }}
+                {{ form.fecha_factura }}
+            </div>
+            <div class="col-md-6">
+                {{ form.observaciones.label }}
+                {{ form.observaciones }}
+            </div>
+        </div>
+        <div class="row">
+            <table class="table" id="TablaDetalleFactura">
+              <thead>
+                <tr>
+                  <th scope="col">Producto</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Precio unitario</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">
+                      <button type="button" id="btnAgregarItemDetalle"
+                              class="agregarItemDetalle btn btn-sm btn-outline-success">
+                          Agregar
+                      </button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in detalles %}
+                    <tr>
+                      <td>
+                          <input type="text" class="form-control">
+                          {{ item.rel_producto }}
+                      </td>
+                      <td>
+                          {{ item.cantidad }}
+                      </td>
+                      <td>
+                          {{ item.precio_unitario }}
+                      </td>
+                      <td>
+                          {{ item.precio_total }}
+                      </td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+        <br/>
+        <input type="submit" value="Guardar" class="btn btn-primary"/>
+    </form>
+</div>
+{% endblock %}
+
+

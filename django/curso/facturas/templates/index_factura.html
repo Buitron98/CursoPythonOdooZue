@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+<div class="row">
+  <div class="d-flex justify-content-start" style="float:left;">
+    <h3>Facturas</h3>
+  </div>
+  <div class="d-flex justify-content-end" style="float:left;">
+    <a type="button" class="btn btn-sm btn-outline-success" href="{% url 'crear_factura' %}">Crear</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Cliente</th>
+      <th scope="col">Gran Total</th>
+      <th scope="col">Observaciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for factura in facturas %}
+        <tr>
+          <td>{{ producto.id }}</td>
+          <td>{{ producto.rel_cliente }}</td>
+          <td>{{ producto.precio_total }}</td>
+          <td>{{ producto.observaciones }}</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

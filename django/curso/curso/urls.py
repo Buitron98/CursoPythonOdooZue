@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
 from ingreso import views as vi
 from clientes import views as vc
 from productos import views as vp
+from facturas import views as vf
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,8 +35,14 @@ urlpatterns = [
     #Productos
     path('index_producto/', vp.index_producto, name='index_producto'),
     path('crear_producto/', vp.crear_producto, name='crear_producto'),
-
+    #Facturas
+    path('index_factura/', vf.index_factura, name='index_factura'),
+    path('crear_factura/', vf.crear_factura, name='crear_factura'),
 ]
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 #Ajuste Portal Administración
 admin.site.site_title = 'Administración Curso Python'

@@ -11,7 +11,7 @@ def index_producto(request):
 
 def crear_producto(request):
     if request.method == 'POST':
-        form = ProductosForm(request.POST)
+        form = ProductosForm(request.POST, request.FILES)
         if form.is_valid():
             data_form = form.cleaned_data
             print(request.POST.get('cliente'))
