@@ -24,10 +24,15 @@
   <tbody>
     {% for factura in facturas %}
         <tr>
-          <td>{{ producto.id }}</td>
-          <td>{{ producto.rel_cliente }}</td>
-          <td>{{ producto.precio_total }}</td>
-          <td>{{ producto.observaciones }}</td>
+          <td>{{ factura.id }}</td>
+          <td>{{ factura.rel_cliente }}</td>
+          <td>{{ factura.precio_total }}</td>
+          <td>{{ factura.observaciones }}</td>
+          <td><a type="button" class="btn btn-sm btn-outline-primary"
+                 href="{% url 'modificar_factura' id=factura.id %}">Modificar</a>
+          </td>
+          <td><a type="button" class="btn btn-sm btn-outline-danger"
+                  href="{% url 'eliminar_factura' id=factura.id %}">Eliminar</a></td>
         </tr>
     {% endfor %}
   </tbody>

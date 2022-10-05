@@ -10,6 +10,13 @@ class Productos(models.Model):
     precio = models.DecimalField(verbose_name='Precio', max_digits=15, decimal_places=2)
     descripcion = models.TextField(verbose_name='Descripción')
 
+    class Meta:
+        verbose_name = 'Producto'
+        verbose_name_plural = 'Productos'
+
+    def __str__(self):
+        return f"{self.codigo} | {self.nombre}"
+
 class ProductosForm(ModelForm):
     class Meta:
         model = Productos

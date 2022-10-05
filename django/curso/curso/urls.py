@@ -38,6 +38,8 @@ urlpatterns = [
     #Facturas
     path('index_factura/', vf.index_factura, name='index_factura'),
     path('crear_factura/', vf.crear_factura, name='crear_factura'),
+    path('modificar_factura/<int:id>', vf.modificar_factura, name='modificar_factura'),
+    path('eliminar_factura/<int:id>', vf.eliminar_factura, name='eliminar_factura'),
 ]
 
 if settings.DEBUG:

@@ -15,7 +15,8 @@
                 {{ form.rel_cliente.label }}
                 {{ form.rel_cliente }}
                 {{ form.fecha_factura.label }}
-                {{ form.fecha_factura }}
+                <input type="date" class="form-control" id="fecha_factura" name="fecha_factura"
+                       value="{{ form.fecha_factura.value|date:'Y-m-d' }}"/>
             </div>
             <div class="col-md-6">
                 {{ form.observaciones.label }}
@@ -23,6 +24,11 @@
             </div>
         </div>
         <div class="row">
+            <select hidden="hidden" class="form-control" id="field_rel_producto" name="rel_producto_item">
+                {% for producto in productos %}
+                <option value="{{ producto.codigo }}">{{ producto }}</option>
+                {% endfor %}
+            </select>
             <table class="table" id="TablaDetalleFactura">
               <thead>
                 <tr>
@@ -42,22 +48,33 @@
                 {% for item in detalles %}
                     <tr>
                       <td>
-                          <input type="text" class="form-control">
-                          {{ item.rel_producto }}
+                          <select class="form-control" id="field_rel_producto" name="rel_producto_0"
+                            value="{{ item.rel_producto }}">
+                                {% for producto in productos %}
+                                <option value="{{ producto.codigo }}">{{ producto }}</option>
+                                {% endfor %}
+                          </select>
                       </td>
                       <td>
-                          {{ item.cantidad }}
+                          <input type="number" class="form-control" name="cantidad_0" value="{{ item.cantidad }}">
                       </td>
                       <td>
-                          {{ item.precio_unitario }}
+                          <input type="number" step="0.01" class="form-control" name="precio_unitario_0" value="{{ item.precio_unitario|floatformat }}">
                       </td>
                       <td>
-                          {{ item.precio_total }}
+                          <input type="number" step="0.01" class="form-control" name="precio_total_0" value="{{ item.precio_total|floatformat }}">
+                      </td>
+                      <td>
+                        <button type="button" id="btnEliminarItemDetalle" class="eliminarItemDetalle btn btn-sm btn-outline-danger">Eliminar</button>
                       </td>
                     </tr>
                 {% endfor %}
               </tbody>
             </table>
+        </div>
+        <div class="offset-md-10 col-md-2">
+            {{ form.precio_total.label }}
+            {{ form.precio_total }}
         </div>
         <br/>
         <input type="submit" value="Guardar" class="btn btn-primary"/>
