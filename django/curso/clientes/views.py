@@ -1,13 +1,16 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from clientes.models import Clientes,ClientesForm
 
+@login_required(login_url="login_page")
 def index(request):
     clientes = Clientes.objects.all()
     return render(request,'index_cliente.html',{
         'clientes': clientes
     })
 
+@login_required(login_url="login_page")
 def crear_cliente(request):
     if request.method == 'POST':
         form = ClientesForm(request.POST)
@@ -28,6 +31,7 @@ def crear_cliente(request):
         'form':form,
     })
 
+@login_required(login_url="login_page")
 def modificar_cliente(request,id):
     cliente = Clientes.objects.get(pk=id)
     if request.method == 'POST':
