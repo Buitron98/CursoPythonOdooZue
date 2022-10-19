@@ -1,0 +1,43 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="zue_curso.report_proveedores_list">
+      <field name="name">zue_curso report proveedores list</field>
+      <field name="model">zue_curso.report_proveedores</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="solicitante"/>
+          <field name="fecha_expedicion"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="zue_curso.report_proveedores_form">
+      <field name="name">zue_curso report proveedores form</field>
+      <field name="model">zue_curso.report_proveedores</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="solicitante"/>
+              <field name="fecha_expedicion"/>
+              <field name="proveedor_ids"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="zue_curso.action_window_report_proveedores">
+      <field name="name">Reporte de proveedores</field>
+      <field name="res_model">zue_curso.report_proveedores</field>
+      <field name="view_mode">tree,form</field>
+      <field name="target">current</field>
+    </record>
+
+  </data>
+</odoo>

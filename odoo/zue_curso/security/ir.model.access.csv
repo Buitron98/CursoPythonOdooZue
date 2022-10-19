@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_zue_curso_proveedores,zue_curso.proveedores,model_zue_curso_proveedores,,1,1,1,1
+access_zue_curso_report_proveedores,zue_curso.report_proveedores,model_zue_curso_report_proveedores,,1,1,1,1

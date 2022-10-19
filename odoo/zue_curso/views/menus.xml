@@ -1,0 +1,19 @@
+<odoo>
+  <data>
+  <!-- Top menu item -->
+  <menuitem name="Proveedores" id="zue_curso.menu_root"/>
+
+    <!-- menu categories -->
+    <menuitem name="Proveedores" id="zue_curso.menu_proveedores" parent="zue_curso.menu_root" sequence="1" action="zue_curso.action_window_proveedores"/>
+    <!-- <menuitem name="Menu 2" id="zue_curso.menu_2" parent="zue_curso.menu_root"/> -->
+    <menuitem name="Reportes" id="zue_curso.reportes" parent="zue_curso.menu_root" sequence="2"/>
+      <menuitem name="Reporte de proveedores" id="zue_curso.menu_report_proveedores" parent="zue_curso.reportes" sequence="1" action="zue_curso.action_window_report_proveedores"/>
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="zue_curso.menu_1_list" parent="zue_curso.menu_1"
+              action="zue_curso.action_window"/>
+    <menuitem name="Server to list" id="zue_curso" parent="zue_curso.menu_2"
+              action="zue_curso.action_server"/>
+-->
+  </data>
+</odoo>
