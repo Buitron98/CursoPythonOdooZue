@@ -1,0 +1,65 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="zue_curso.employee_list">
+            <field name="name">zue_curso employee list</field>
+            <field name="model">zue_curso.employee</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="wage"/>
+                    <field name="date_start_company"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="zue_curso.employee_form">
+            <field name="name">zue_curso employee form</field>
+            <field name="model">zue_curso.employee</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="wage"/>
+                                <field name="date_start_company"/>
+                            </group>
+                        </group>
+<!--                        <notebook>-->
+<!--                            <page string="Datos basicos">-->
+<!--                                <group>-->
+<!--                                    <group>-->
+<!--                                        <field name="phone"/>-->
+<!--                                        <field name="mobile"/>-->
+<!--                                        <field name="email"/>-->
+<!--                                    </group>-->
+<!--                                    <group>-->
+<!--                                        <field name="street"/>-->
+<!--                                        <field name="city"/>-->
+<!--                                        <field name="state_id"/>-->
+<!--                                        <field name="country_id"/>-->
+<!--                                    </group>-->
+<!--                                </group>-->
+<!--                            </page>-->
+<!--                            <page string="Datos Familiares">-->
+<!--                                <group>-->
+<!--                                    <field name="child_ids"/>-->
+<!--                                </group>-->
+<!--                            </page>-->
+<!--                        </notebook>-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="zue_curso.action_window_employee">
+            <field name="name">Empleados</field>
+            <field name="res_model">zue_curso.employee</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

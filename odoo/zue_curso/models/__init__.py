@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-from . import models, report_proveedores
+from . import models, res_partner, employee

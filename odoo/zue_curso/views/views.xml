@@ -1,49 +1,122 @@
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="zue_curso.proveedores_list">
+            <field name="name">zue_curso proveedores list</field>
+            <field name="model">zue_curso.proveedores</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="complate_name"/>
+                    <field name="active" widget="boolean_toggle"/>
+                    <field name="type_document"/>
+                    <field name="num_document"/>
+                    <field name="value"/>
+                    <field name="date_vinculation"/>
+                    <field name="type_proveedor"/>
+                    <field name="partner_id"/>
+                </tree>
+            </field>
+        </record>
 
-    <record model="ir.ui.view" id="zue_curso.proveedores_list">
-      <field name="name">zue_curso proveedores list</field>
-      <field name="model">zue_curso.proveedores</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="complate_name"/>
-          <field name="active"/>
-          <field name="date_vinculation"/>
-          <field name="type_proveedor"/>
-        </tree>
-      </field>
-    </record>
+        <record model="ir.ui.view" id="zue_curso.proveedores_form">
+            <field name="name">zue_curso proveedores form</field>
+            <field name="model">zue_curso.proveedores</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="return_msg_example" type="object" string="Mensaje" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" clickable="1"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="complate_name"/>
+                                <field name="active"/>
+                                <field name="type_document"/>
+                                <field name="num_document"/>
+                            </group>
+                            <group>
+                                <field name="value"/>
+                                <field name="description"/>
+                                <field name="date_vinculation"/>
+                                <field name="type_proveedor"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="partner_company"/>
+                            <field name="partner_function"/>
+                            <field name="partner_website"/>
+                        </group>
+                        <notebook>
+                            <page string="Reportes">
+                                <group>
+                                    <field name="report_ids" nolabel="1">
+                                        <tree>
+                                            <field name="name"/>
+                                            <field name="solicitante"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Campos calculados">
+                                <group>
+                                    <field name="porc_a_reconocer"/>
+                                    <field name="fecha_vencimiento"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
 
-    <record model="ir.ui.view" id="zue_curso.proveedores_form">
-      <field name="name">zue_curso proveedores form</field>
-      <field name="model">zue_curso.proveedores</field>
-      <field name="arch" type="xml">
-        <form>
-          <sheet>
-            <group>
-              <field name="complate_name"/>
-              <field name="active"/>
-              <field name="type_document"/>
-              <field name="num_document"/>
-              <field name="value"/>
-              <field name="description"/>              
-              <field name="date_vinculation"/>
-              <field name="type_proveedor"/>
-              <field name="partner_id"/>
-              <field name="report_ids"/>
-            </group>
-          </sheet>
-        </form>
-      </field>
-    </record>
+        <record model="ir.ui.view" id="zue_curso.proveedores_calendar">
+            <field name="name">zue_curso proveedores calendar</field>
+            <field name="model">zue_curso.proveedores</field>
+            <field name="arch" type="xml">
+                <calendar date_start="date_vinculation" mode="month">
+                </calendar>
+            </field>
+        </record>
 
-    <!-- actions opening views on models -->
-    <record model="ir.actions.act_window" id="zue_curso.action_window_proveedores">
-      <field name="name">Proveedores</field>
-      <field name="res_model">zue_curso.proveedores</field>
-      <field name="view_mode">tree,form</field>
-    </record>
+        <record model="ir.ui.view" id="zue_curso.proveedores_kanban">
+            <field name="name">zue_curso proveedores kanban</field>
+            <field name="model">zue_curso.proveedores</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+<!--                    <link rel="stylesheet" href="zue_curso/static/css/kanban_proveedores.css"/>-->
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_content oe_kanban_global_click">
+                                <div>
+                                    <span>Documento: <field name="type_document"/> - <field name="num_document"/></span>
+                                </div>
+                                <div>
+                                    <b>Nombre: <field name="complate_name"/></b>
+                                </div>
+                                <div>
+                                    <span><field name="date_vinculation"/></span>
+                                    <span><field name="type_proveedor"/></span>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
 
-  </data>
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="zue_curso.action_window_proveedores">
+            <field name="name">Proveedores</field>
+            <field name="res_model">zue_curso.proveedores</field>
+            <field name="view_mode">tree,form,calendar,kanban</field>
+        </record>
+
+    </data>
 </odoo>

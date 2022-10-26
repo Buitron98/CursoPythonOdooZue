@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_zue_curso_proveedores,zue_curso.proveedores,model_zue_curso_proveedores,,1,1,1,1
 access_zue_curso_report_proveedores,zue_curso.report_proveedores,model_zue_curso_report_proveedores,,1,1,1,1
+access_zue_curso_employee,zue_curso.employee,model_zue_curso_employee,,1,1,1,0
+access_zue_curso_process_partner,zue_curso.process_partner,model_zue_curso_process_partner,,1,1,1,0
