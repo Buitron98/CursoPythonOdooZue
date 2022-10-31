@@ -1,0 +1,18 @@
+<odoo>
+  <data>
+    <!-- Top menu item -->
+    <menuitem name="Productos" id="zue_curso_productos.menu_root"/>
+
+    <!-- menu categories -->
+    <menuitem name="Productos" id="zue_curso_productos.menu_curso_products" parent="zue_curso_productos.menu_root"
+        action="zue_curso_productos.products_action_window"/>
+    <menuitem name="Configuración" id="zue_curso_productos.menu_conf" parent="zue_curso_productos.menu_root"/>
+
+    <!-- actions -->
+<!--    <menuitem name="Productos" id="zue_curso_productos.menu_1_list" parent="zue_curso_productos.menu_1"-->
+<!--              action="zue_curso_productos.action_window"/>-->
+<!--    <menuitem name="Atributos de productos" id="zue_curso_productos" parent="zue_curso_productos.menu_2"-->
+<!--              action="zue_curso_productos.action_server"/>-->
+
+  </data>
+</odoo>

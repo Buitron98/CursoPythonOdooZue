@@ -14,6 +14,7 @@
                     <field name="date_vinculation"/>
                     <field name="type_proveedor"/>
                     <field name="partner_id"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>
@@ -111,11 +112,65 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="zue_curso.proveedores_search">
+            <field name="name">zue_curso proveedores search</field>
+            <field name="model">zue_curso.proveedores</field>
+            <field name="arch" type="xml">
+                <search>
+<!--                    BARRA DE BUSQUEDA-->
+                    <field name="complate_name" string="Nombre / Documento" filter_domain="['|',('complate_name','ilike',self),('num_document','ilike',self)]"/>
+                    <field name="complate_name" string="Nombre" filter_domain="[('complate_name','ilike',self)]"/>
+                    <field name="num_document" string="Documento" filter_domain="[('num_document','ilike',self)]"/>
+                    <!-- <field name="complate_name" string="Nombre =" filter_domain="[('complate_name','=',self)]"/>-->
+                    <!-- <field name="complate_name" string="Nombre !=" filter_domain="[('complate_name','!=',self)]"/>-->
+                    <!-- <field name="complate_name" string="Nombre like" filter_domain="[('complate_name','like',self)]"/>-->
+                    <!-- <field name="complate_name" string="Nombre not ilike" filter_domain="[('complate_name','not ilike',self)]"/>-->
+<!--                    FILTROS ESTATICOS-->
+                    <filter string="Inactivos" name="inactive" domain="[('active','=',False)]"/>
+                    <separator/>
+                    <filter string="Borrador" name="filter_draft" domain="[('state','=','draft')]"/>
+                    <filter string="En Proceso" name="filter_process" domain="[('state','=','process')]"/>
+                    <filter string="Finalizado" name="filter_close" domain="[('state','=','close')]"/>
+                    <separator/>
+                    <filter string="Valor inferior a 500" name="value_inf" domain="[('value','&lt;',500)]"/>
+                    <filter string="Valor superior a 500" name="value_sup" domain="[('value','>=',500)]"/>
+<!--                    GRUPOS ESTATICOS-->
+                    <group expand="1">
+                        <filter string="Tipo" name="type_proveedor" context="{'group_by':'type_proveedor'}"/>
+                        <filter string="Estado" name="group_state" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="zue_curso.proveedores_graph">
+            <field name="name">zue_curso proveedores graph</field>
+            <field name="model">zue_curso.proveedores</field>
+            <field name="arch" type="xml">
+                <graph>
+                    <field name="type_proveedor"/>
+                    <field name="state"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="zue_curso.proveedores_pivot">
+            <field name="name">zue_curso proveedores pivot</field>
+            <field name="model">zue_curso.proveedores</field>
+            <field name="arch" type="xml">
+                <pivot>
+                    <field name="type_proveedor" type="row"/>
+                    <field name="state" type="col"/>
+                    <field name="value" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
         <!-- actions opening views on models -->
         <record model="ir.actions.act_window" id="zue_curso.action_window_proveedores">
             <field name="name">Proveedores</field>
             <field name="res_model">zue_curso.proveedores</field>
-            <field name="view_mode">tree,form,calendar,kanban</field>
+            <field name="view_mode">tree,form,calendar,kanban,graph,pivot</field>
         </record>
 
     </data>

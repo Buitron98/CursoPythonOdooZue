@@ -1,0 +1,84 @@
+<odoo>
+    <data>
+        <!-- Vista Tree - Productos -->
+        <record model="ir.ui.view" id="zue_curso_productos.products_list">
+            <field name="name">zue_curso_productos list</field>
+            <field name="model">zue.curso.products</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="code"/>
+                    <field name="description"/>
+                    <field name="type_product"/>
+                    <field name="unit_price"/>
+                    <field name="country_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vista Formulario - Productos -->
+        <record model="ir.ui.view" id="zue_curso_productos.products_form">
+            <field name="name">zue_curso_productos form</field>
+            <field name="model">zue.curso.products</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="description"/>
+                                <field name="type_product" widget="radio"/>
+                                <field name="country_id"/>
+                            </group>
+                            <group>
+                                <field name="unit_price"/>
+                                <field name="unif_measure" widget="radio"/>
+                                <field name="brand"/>
+                                <field name="observations"/>
+                            </group>
+                        </group>
+                        <group string="Atributos">
+                            <field name="attributes_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="info"/>
+                                    <field name="additional_value"/>
+                                    <field name="brand"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista Search/Busqueda - Productos -->
+        <record model="ir.ui.view" id="zue_curso_productos.products_search">
+            <field name="name">zue_curso_productos search</field>
+            <field name="model">zue.curso.products</field>
+            <field name="arch" type="xml">
+                <search>
+                    <!--BARRA DE BUSQUEDA-->
+                    <field name="description" string="Descripción" filter_domain="[('description','ilike',self)]"/>
+                    <field name="code" string="Código" filter_domain="[('code','ilike',self)]"/>
+                    <!--FILTROS ESTATICOS-->
+                    <filter string="Consumibles" name="filter_con" domain="[('type_product','=','con')]"/>
+                    <filter string="Almacenables" name="filter_alm" domain="[('type_product','=','alm')]"/>
+                    <filter string="Servicios" name="filter_ser" domain="[('type_product','=','ser')]"/>
+                    <!--GRUPOS ESTATICOS-->
+                    <group expand="1">
+                        <filter string="Tipo" name="type_product" context="{'group_by':'type_product'}"/>
+                        <filter string="Unidad de medida" name="unif_measure" context="{'group_by':'unif_measure'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="zue_curso_productos.products_action_window">
+            <field name="name">Productos</field>
+            <field name="res_model">zue.curso.products</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>
