@@ -32,7 +32,7 @@ class zue_curso_proveedores(models.Model):
     description = fields.Text(string='Descripción')
     type_proveedor = fields.Selection([('a','Adquiriente'),('b','Prestamista'),('c','Publico')], string='Tipo', tracking=True)
     date_vinculation = fields.Date(string='Fecha de vinculación', required=True, tracking=True)
-    partner_id = fields.Many2one('res.partner',string='Contacto asociado',domain="[('parent_id','!=',False)]", tracking=True)
+    partner_id = fields.Many2one('res.partner',string='Contacto asociado',domain="[('parent_id','=',False)]", tracking=True)
     partner_function = fields.Char(related='partner_id.function', string='Cargo contacto')
     partner_company = fields.Many2one(related='partner_id.parent_id',string='Compañia')
     partner_website = fields.Char(related='partner_id.parent_id.website', string='Sitio web')

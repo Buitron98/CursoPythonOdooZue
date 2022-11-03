@@ -34,7 +34,7 @@
         'views/inherit_views_partner.xml',
         'views/actions_employee.xml',
         'views/menus.xml',
-        # 'views/templates.xml',
+        'views/actions_proveedores.xml',
     ],
     # only loaded in demonstration mode
     # 'demo': [

@@ -24,7 +24,9 @@
                 <xpath expr="//form[1]/sheet[1]/group[1]/group[2]" position="inside">
                     <field name="is_proveedor"/>
                     <field name="type_proveedor" attrs="{'invisible':[['is_proveedor','=',False]]}"/>
-                    <button name="create_proveedor" type="object" string="Crear proveedor"/>
+                    <button name="create_proveedor" type="object" string="Crear proveedores"/>
+                    <button name="create_report_proveedores" type="object" string="Reporte proveedores"/>
+                    <button name="delete_proveedor" type="object" string="Eliminar proveedores"/>
                 </xpath>
             </field>
         </record>

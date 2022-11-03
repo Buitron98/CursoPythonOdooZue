@@ -136,6 +136,7 @@
                     <filter string="Valor superior a 500" name="value_sup" domain="[('value','>=',500)]"/>
 <!--                    GRUPOS ESTATICOS-->
                     <group expand="1">
+                        <filter string="Contacto" name="group_partner_id" context="{'group_by':'partner_id'}"/>
                         <filter string="Tipo" name="type_proveedor" context="{'group_by':'type_proveedor'}"/>
                         <filter string="Estado" name="group_state" context="{'group_by':'state'}"/>
                     </group>
@@ -166,11 +167,31 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="zue_curso.proveedores_activity">
+            <field name="name">zue_curso proveedores activity</field>
+            <field name="model">zue_curso.proveedores</field>
+            <field name="arch" type="xml">
+                <activity string="Proveedores">
+                    <templates>
+                        <div t-name="activity-box">
+                            <div>
+                                <field name="complate_name"/>
+                                <br/>
+                                <field name="type_proveedor"/>
+                                <br/>
+                                <field name="date_vinculation"/>
+                            </div>
+                        </div>
+                    </templates>
+                </activity>
+            </field>
+        </record>
+
         <!-- actions opening views on models -->
         <record model="ir.actions.act_window" id="zue_curso.action_window_proveedores">
             <field name="name">Proveedores</field>
             <field name="res_model">zue_curso.proveedores</field>
-            <field name="view_mode">tree,form,calendar,kanban,graph,pivot</field>
+            <field name="view_mode">tree,form,calendar,kanban,graph,pivot,activity</field>
         </record>
 
     </data>

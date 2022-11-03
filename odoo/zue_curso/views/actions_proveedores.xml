@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+        <record model="ir.actions.server" id="zue_curso.action_server_create_proveedores">
+            <field name="name">Crear Proveedores</field>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['res.partner'].browse(env.context['active_ids']).create_report_proveedores()
+            </field>
+        </record>
+
+        <record model="base.automation" id="zue_curso.action_automation_create_proveedores">
+            <field name="name">Crear Proveedores Automatico</field>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="active">True</field>
+            <field name="state">code</field>
+            <field name="trigger">on_create_or_write</field>
+            <field name="code">
+                record.create_proveedor()
+            </field>
+        </record>
+
+    </data>
+</odoo>
