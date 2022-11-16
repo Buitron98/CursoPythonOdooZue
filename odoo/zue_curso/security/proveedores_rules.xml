@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+
+        <record id="proveedores_rule_user_create" model="ir.rule">
+            <field name="name">Proveedores usuarios de creación</field>
+            <field name="model_id" ref="model_zue_curso_proveedores"/>
+            <field name="domain_force">
+                [('create_uid','=',user.id)]
+            </field>
+        </record>
+
+<!--        <record id="proveedores_rule_type_proveedor_admin" model="ir.rule">-->
+<!--            <field name="name">Tipos de proveedores para el administrador</field>-->
+<!--            <field name="model_id" ref="model_zue_curso_proveedores"/>-->
+<!--            <field name="domain_force">-->
+<!--                [('type_proveedor','in',['a','b'])]-->
+<!--            </field>-->
+<!--&lt;!&ndash;            <field name="groups" eval="[Command.link(ref(zue_curso.group_admin_curso_proveedores))]"/>&ndash;&gt;-->
+<!--        </record>-->
+
+<!--        <record id="proveedores_rule_type_proveedor_user" model="ir.rule">-->
+<!--            <field name="name">Tipos de proveedores para el usuario estandar</field>-->
+<!--            <field name="model_id" ref="model_zue_curso_proveedores"/>-->
+<!--            <field name="domain_force">-->
+<!--                [('type_proveedor','in',['c'])]-->
+<!--            </field>-->
+<!--&lt;!&ndash;            <field name="groups" eval="[Command.link(ref(zue_curso.group_user_curso_proveedores))]"/>&ndash;&gt;-->
+<!--        </record>-->
+
+    </data>
+</odoo>

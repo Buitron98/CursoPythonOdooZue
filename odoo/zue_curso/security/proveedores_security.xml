@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+<!--        <record model="ir.module.category" id="base.module_category_curso_proveedores">-->
+<!--            <field name="description">ZUE Curso</field>-->
+<!--            <field name="sequence">25</field>-->
+<!--        </record>-->
+
+        <record model="res.groups" id="zue_curso.group_admin_curso_proveedores">
+            <field name="name">Administrador</field>
+            <field name="comment">Administrador de proveedores de la app zue curso</field>
+            <field name="category_id" ref="base.module_category_zue_curso"/>
+        </record>
+
+        <record model="res.groups" id="zue_curso.group_user_curso_proveedores">
+            <field name="name">Usuario estandar</field>
+            <field name="comment">Usuario estandar de proveedores de la app zue curso</field>
+            <field name="category_id" ref="base.module_category_zue_curso"/>
+        </record>
+    </data>
+</odoo>

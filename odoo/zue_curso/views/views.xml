@@ -25,8 +25,10 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button name="return_msg_example" type="object" string="Mensaje" class="oe_highlight"/>
-                        <field name="state" widget="statusbar" clickable="1"/>
+                        <button name="execute_authorized_wizard" type="object" string="Autorizar" class="oe_highlight"
+                                attrs="{'invisible': [('state','!=','draft')]}"/>
+                        <button name="return_msg_example" type="object" string="Mensaje"/>
+                        <field name="state" widget="statusbar" clickable="0"/>
                     </header>
                     <sheet>
                         <group>
@@ -38,9 +40,9 @@
                             </group>
                             <group>
                                 <field name="value"/>
-                                <field name="description"/>
                                 <field name="date_vinculation"/>
                                 <field name="type_proveedor"/>
+                                <field name="description"/>
                             </group>
                         </group>
                         <group>
@@ -187,11 +189,72 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="zue_curso.proveedores_cohort">
+            <field name="name">zue_curso proveedores cohort</field>
+            <field name="model">zue_curso.proveedores</field>
+            <field name="arch" type="xml">
+                <cohort string="Proveedores" date_start="date_vinculation" date_stop="fecha_vencimiento" interval="month">
+                </cohort>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="zue_curso.proveedores_gantt">
+            <field name="name">zue_curso proveedores gantt</field>
+            <field name="model">zue_curso.proveedores</field>
+            <field name="arch" type="xml">
+                <gantt string="Proveedores" date_start="date_vinculation" date_stop="fecha_vencimiento"
+                        default_group_by="type_proveedor">
+                </gantt>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="zue_curso.proveedores_map">
+            <field name="name">zue_curso proveedores map</field>
+            <field name="model">zue_curso.proveedores</field>
+            <field name="arch" type="xml">
+                <map res_partner="partner_id">
+                    <field name="complate_name" string="Nombre"/>
+<!--                    <field name="type_proveedor"/>-->
+<!--                    <field name="date_vinculation"/>-->
+                </map>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="zue_curso.proveedores_dashboard">
+            <field name="name">zue_curso proveedores dashboard</field>
+            <field name="model">zue_curso.proveedores</field>
+            <field name="arch" type="xml">
+                <dashboard>
+                    <view type="graph" ref="zue_curso.proveedores_graph"/>
+                    <group>
+                        <aggregate name="sum_value" string="Sumatoria Valor" field="value"
+                                        group_operator="sum" help="Sumatoria del campo valores de los proveedores"/>
+                        <aggregate name="min_value" string="Minimo Valor" field="value"
+                                        group_operator="min" help="Minimo del campo valores de los proveedores"/>
+                        <aggregate name="max_value" string="Maximo Valor" field="value"
+                                        group_operator="max" help="Maximo del campo valores de los proveedores"/>
+                        <aggregate name="avg_value" string="Promedio Valor" field="value"
+                                        group_operator="avg" help="Promedio del campo valores de los proveedores"/>
+                        <aggregate name="count_value" string="Contador contactos" field="partner_id"
+                                        group_operator="count"/>
+                        <aggregate name="count_distinct_value" string="Contador distinct contactos" field="partner_id"
+                                        group_operator="count_distinct"/>
+                    </group>
+                    <group>
+                        <formula name="value_duplicate" string="Valor Duplicado" value="record.sum_value * 2"/>
+                        <widget name="pie_chart" title="Tipo Proveedor" attrs="{'groupby': 'type_proveedor'}"/>
+                        <widget name="pie_chart" title="Contacto asociado" attrs="{'groupby': 'partner_id'}"/>
+                    </group>
+                    <view type="pivot" ref="zue_curso.proveedores_pivot"/>
+                </dashboard>
+            </field>
+        </record>
+
         <!-- actions opening views on models -->
         <record model="ir.actions.act_window" id="zue_curso.action_window_proveedores">
             <field name="name">Proveedores</field>
             <field name="res_model">zue_curso.proveedores</field>
-            <field name="view_mode">tree,form,calendar,kanban,graph,pivot,activity</field>
+            <field name="view_mode">tree,form,calendar,kanban,graph,pivot,activity,cohort,gantt,map,dashboard</field>
         </record>
 
     </data>

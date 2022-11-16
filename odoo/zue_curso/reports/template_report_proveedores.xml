@@ -1,0 +1,56 @@
+<odoo>
+    <template id="zue_curso.report_list_proveedores">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <h1>
+                        <span t-esc="o.report_id.name"/>
+                    </h1>
+                    <br/>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>
+                                    Nombre
+                                </td>
+                                <td>
+                                    Identificación
+                                </td>
+                                <td>
+                                    Tipo
+                                </td>
+                                <td>
+                                    Valor
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.report_id.proveedor_ids" t-as="p">
+                                <td>
+                                    <span t-esc="p.complate_name"/>
+                                </td>
+                                <td>
+                                    <span t-esc="p.type_document"/>-<span t-esc="p.num_document"/>
+                                </td>
+                                <td>
+                                    <t t-if="p.type_proveedor == 'a'">
+                                        Adquiriente
+                                    </t>
+                                    <t t-if="p.type_proveedor == 'b'">
+                                        Prestamista
+                                    </t>
+                                    <t t-if="p.type_proveedor == 'c'">
+                                        Publico
+                                    </t>
+                                </td>
+                                <td>
+                                    <span t-esc="p.value"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

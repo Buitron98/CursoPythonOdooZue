@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="zue_curso.action_window_wizard_proveedores_authorized">
+            <field name="name">Autorizar Proveedoor</field>
+            <field name="res_model">zue_curso.proveedores_authorized_wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+<!--            <field name="binging_model_id" ref="model_zue_curso_proveedores"/>-->
+        </record>
+
+        <record model="ir.ui.view" id="zue_curso.wizard_proveedores_authorized_form">
+            <field name="name">zue_curso wizard authorizes proveedores form</field>
+            <field name="model">zue_curso.proveedores_authorized_wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="proveedor_id" readonly="1" force_save="1"/>
+                            <field name="user_id"/>
+                            <field name="description"/>
+                        </group>
+                        <footer>
+                            <button name="execute_authorized" type="object" string="Autorizar" class="oe_highlight"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

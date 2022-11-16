@@ -32,8 +32,8 @@ class res_partner(models.Model):
                     print(f'Proveedor ({obj_proveedor.id}): ')
                     print(obj_proveedor.complate_name)
                     print(obj_proveedor.date_vinculation)
-            else:
-                raise ValidationError('El contacto no esta definido como proveedor')
+            # else:
+            #     raise ValidationError('El contacto no esta definido como proveedor')
 
     def create_report_proveedores(self):
         for record in self:

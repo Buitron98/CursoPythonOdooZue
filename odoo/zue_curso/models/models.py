@@ -19,7 +19,7 @@ class zue_curso_proveedores(models.Model):
     _fold_name = 'type_proveedor'
     #_rec_name = 'complate_name'
 
-    state = fields.Selection([('draft','Borrador'),('process','En Proceso'),('close','Finalizado')],string='Estado', default='draft')
+    state = fields.Selection([('draft','Borrador'),('process','En Proceso'),('close','Finalizado')],string='Estado', default='draft', tracking=True)
     complate_name = fields.Char(string='Nombre', required=True, help='En este campo se digita el nombre del proveedor',
                                 default='/',copy=False, tracking=True)
     type_document = fields.Selection([('NIT','NIT'),
@@ -38,11 +38,30 @@ class zue_curso_proveedores(models.Model):
     partner_website = fields.Char(related='partner_id.parent_id.website', string='Sitio web')
     report_ids = fields.Many2many('zue_curso.report_proveedores', string='Reportes')
     porc_a_reconocer = fields.Float(string='Porcentaje a reconocer', compute='_compute_porcentaje_proveedor',store=True)
-    fecha_vencimiento = fields.Date(string='Fecha vencimiento', compute='_compute_fecha_vencimiento_proveedor')
+    fecha_vencimiento = fields.Date(string='Fecha vencimiento', compute='_compute_fecha_vencimiento_proveedor',store=True)
     #report_id = fields.Many2one('zue_curso.report_proveedores', string='Reporte asociado')
 
     def return_msg_example(self):
         raise ValidationError('Mensaje retornado')
+
+    def execute_authorized_wizard(self):
+        if self.user_has_groups('zue_curso.group_admin_curso_proveedores'):
+            context = {
+                'default_proveedor_id':self.id,
+                'default_user_id': self.env.user.id,
+            }
+
+            action = {
+                'context':context,
+                'view_type':'form',
+                'view_mode':'form',
+                'res_model': 'zue_curso.proveedores_authorized_wizard',
+                'type':'ir.actions.act_window',
+                'target':'new',
+            }
+            return action
+        else:
+            raise ValidationError('Solo el administrador puede autorizar.')
 
     @api.depends('value','type_proveedor')
     def _compute_porcentaje_proveedor(self):
@@ -56,9 +75,11 @@ class zue_curso_proveedores(models.Model):
             else:
                 record.porc_a_reconocer = (record.value / 100) * 5
 
+    @api.depends('date_vinculation')
     def _compute_fecha_vencimiento_proveedor(self):
         for record in self:
-            record.fecha_vencimiento = record.date_vinculation + datetime.timedelta(days=5)
+            if record.date_vinculation:
+                record.fecha_vencimiento = record.date_vinculation + datetime.timedelta(days=5)
 
     _sql_constraints = [
         ('proveedor_unique','UNIQUE(type_document,num_document)','Ya existe un proveedor con este número y tipo de documento.'),

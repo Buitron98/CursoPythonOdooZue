@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="zue_curso.action_window_proveedores_print_report">
+            <field name="name">Imprimir reporte proveedores</field>
+            <field name="res_model">zue_curso.proveedores_print_report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record model="ir.ui.view" id="zue_curso.proveedores_print_report_form">
+            <field name="name">zue_curso proveedores print report form</field>
+            <field name="model">zue_curso.proveedores_print_report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="report_id"/>
+                        </group>
+                        <footer>
+                            <button name="print_report" type="object" string="Imprimir" class="oe_highlight"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

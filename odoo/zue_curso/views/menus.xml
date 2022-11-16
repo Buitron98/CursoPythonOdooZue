@@ -4,8 +4,9 @@
   <menuitem name="Terceros" id="zue_curso.menu_root"/>
     <menuitem name="Proveedores" id="zue_curso.menu_proveedores" parent="zue_curso.menu_root" sequence="1" action="zue_curso.action_window_proveedores"/>
 
-    <menuitem name="Reportes" id="zue_curso.reportes" parent="zue_curso.menu_root" sequence="2"/>
-      <menuitem name="Reporte de proveedores" id="zue_curso.menu_report_proveedores" parent="zue_curso.reportes" sequence="1" action="zue_curso.action_window_report_proveedores"/>
+    <menuitem name="Reportes Proveedores" id="zue_curso.reportes" parent="zue_curso.menu_root" sequence="2"/>
+      <menuitem name="Reportes" id="zue_curso.menu_report_proveedores" parent="zue_curso.reportes" sequence="1" action="zue_curso.action_window_report_proveedores"/>
+      <menuitem name="Imprimir Reporte" id="zue_curso.menu_print_report_proveedores" parent="zue_curso.reportes" sequence="2" action="zue_curso.action_window_proveedores_print_report"/>
 
     <menuitem name="Empleados" id="zue_curso.menu_employee" parent="zue_curso.menu_root" sequence="3" action="zue_curso.action_window_employee"/>
 
