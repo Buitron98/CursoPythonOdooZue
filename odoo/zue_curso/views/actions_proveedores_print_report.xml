@@ -18,6 +18,8 @@
                         </group>
                         <footer>
                             <button name="print_report" type="object" string="Imprimir" class="oe_highlight"/>
+                            <button name="print_report_excel" type="object" string="Generar excel" class="oe_highlight"/>
+                            <button name="print_report_excel_sql" type="object" string="Generar excel SQL" class="oe_highlight"/>
                         </footer>
                     </sheet>
                 </form>

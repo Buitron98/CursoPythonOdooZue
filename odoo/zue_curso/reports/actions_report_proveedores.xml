@@ -1,9 +1,27 @@
 <odoo>
+    <!-- Formato de papel -->
+    <record id="report_proveedores_print_paperformat" model="report.paperformat">
+        <field name="name">Papel Reporte proveedores</field>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">40</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <!-- Acción del reporte -->
     <record id="report_proveedores_print_action" model="ir.actions.report">
         <field name="name">Reporte proveedores</field>
         <field name="model">zue_curso.proveedores_print_report</field>
-        <field name="report_type">qweb-pdf</field>
+        <field name="report_type">qweb-html</field>
         <field name="report_name">zue_curso.report_list_proveedores</field>
         <field name="report_file">zue_curso.report_list_proveedores</field>
+    </record>
+
+    <!-- Asociar Formato de papel al reporte -->
+    <record id="report_proveedores_print_action" model="ir.actions.report">
+        <field name="paperformat_id" ref="zue_curso.report_proveedores_print_paperformat"/>
     </record>
 </odoo>
