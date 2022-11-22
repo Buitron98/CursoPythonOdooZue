@@ -1,0 +1,28 @@
+<odoo>
+    <data noupdate="1">
+        <record model="res.city" id="city_co_001">
+            <field name="name">Medellin</field>
+            <field name="country_id" ref="base.co"/>
+            <field name="state_id" ref="base.state_co_01"/>
+        </record>
+
+        <record model="res.city" id="city_co_002">
+            <field name="name">Bello</field>
+            <field name="country_id" ref="base.co"/>
+            <field name="state_id" ref="base.state_co_01"/>
+        </record>
+
+        <record model="res.city" id="city_co_003">
+            <field name="name">Itagui</field>
+            <field name="country_id" ref="base.co"/>
+            <field name="state_id" ref="base.state_co_01"/>
+        </record>
+
+        <record model="res.city" id="city_co_004">
+            <field name="name">Madrid</field>
+            <field name="country_id" ref="base.co"/>
+            <field name="state_id" ref="base.state_co_11"/>
+        </record>
+
+    </data>
+</odoo>

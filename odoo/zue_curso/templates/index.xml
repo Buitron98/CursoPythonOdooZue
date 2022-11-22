@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <template id="zue_curso.index_page" name="Index">
+            <t t-call="website.layout">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-2 offset-md-1">
+                            <h3>Proveedores:</h3>
+                        </div>
+                        <div class="col-md-5 offset-md-1">
+                            <ul class="list-group" t-foreach="obj_proveedores" t-as="obj_p">
+                                <li class="list-group-item">
+                                    <img t-if="obj_p.image_1920" t-att-src="image_data_uri(obj_p.image_1920)"/>
+                                    <span t-esc="obj_p.name"/>
+<!--                                    <br/>-->
+<!--                                    <span t-esc="obj_p.type_document"/> - <span t-esc="obj_p.num_document"/>-->
+<!--                                    <br/>-->
+<!--                                    <span t-esc="obj_p.date_vinculation"/>-->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

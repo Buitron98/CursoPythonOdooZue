@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api
 from odoo.exceptions import UserError, ValidationError
-import datetime
+from datetime import datetime, timedelta
 
 class zue_curso_process_partner(models.AbstractModel):
     _name = 'zue_curso.process_partner'
@@ -19,6 +19,10 @@ class zue_curso_proveedores(models.Model):
     _fold_name = 'type_proveedor'
     #_rec_name = 'complate_name'
 
+    def _default_date_vinculation(self):
+        date_start = str(datetime.now().year)+'-'+str(datetime.now().month)+'-01'
+        return date_start
+
     state = fields.Selection([('draft','Borrador'),('process','En Proceso'),('close','Finalizado')],string='Estado', default='draft', tracking=True)
     complate_name = fields.Char(string='Nombre', required=True, help='En este campo se digita el nombre del proveedor',
                                 default='/',copy=False, tracking=True)
@@ -31,7 +35,7 @@ class zue_curso_proveedores(models.Model):
     value = fields.Float(string='Valor', tracking=True)
     description = fields.Text(string='Descripción')
     type_proveedor = fields.Selection([('a','Adquiriente'),('b','Prestamista'),('c','Publico')], string='Tipo', tracking=True)
-    date_vinculation = fields.Date(string='Fecha de vinculación', required=True, tracking=True)
+    date_vinculation = fields.Date(string='Fecha de vinculación', required=True, tracking=True, default=_default_date_vinculation)
     partner_id = fields.Many2one('res.partner',string='Contacto asociado',domain="[('parent_id','=',False)]", tracking=True)
     partner_function = fields.Char(related='partner_id.function', string='Cargo contacto')
     partner_company = fields.Many2one(related='partner_id.parent_id',string='Compañia')
@@ -79,7 +83,7 @@ class zue_curso_proveedores(models.Model):
     def _compute_fecha_vencimiento_proveedor(self):
         for record in self:
             if record.date_vinculation:
-                record.fecha_vencimiento = record.date_vinculation + datetime.timedelta(days=5)
+                record.fecha_vencimiento = record.date_vinculation + timedelta(days=5)
 
     _sql_constraints = [
         ('proveedor_unique','UNIQUE(type_document,num_document)','Ya existe un proveedor con este número y tipo de documento.'),
