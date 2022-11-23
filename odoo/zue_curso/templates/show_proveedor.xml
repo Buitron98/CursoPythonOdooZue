@@ -1,0 +1,82 @@
+<odoo>
+    <data>
+        <template id="zue_curso.page_show_proveedor" name="Index">
+            <t t-call="website.layout">
+                <link rel="stylesheet" href="/zue_curso/static/src/css/proveedores.css"/>
+                <div class="col-md-12 block_curso">
+                    <h3>Ver Proveedor</h3>
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <img t-if="proveedor.partner_id.image_1920" class="img-fluid"
+                                         t-att-src="image_data_uri(proveedor.partner_id.image_1920)"/>
+                                </div>
+                                <div class="col-md-10">
+                                    <h1 class="display-4">
+                                        <span t-esc="proveedor.complate_name"/>
+                                    </h1>
+                                    <p class="lead">
+                                        <b>Identificación:</b>
+                                        <span t-esc="proveedor.type_document"/>
+                                        -
+                                        <span t-esc="proveedor.num_document"/>
+                                    </p>
+                                    <p class="lead">
+                                        <b>Valor:</b>
+                                        <span t-esc="proveedor.value"/>
+                                    </p>
+                                    <p class="lead">
+                                        <b>Tipo:</b>
+                                        <t t-if="proveedor.type_proveedor == 'a'">
+                                            Adquiriente
+                                        </t>
+                                        <t t-if="proveedor.type_proveedor == 'b'">
+                                            Prestamista
+                                        </t>
+                                        <t t-if="proveedor.type_proveedor == 'c'">
+                                            Publico
+                                        </t>
+                                    </p>
+                                    <p class="lead">
+                                        <b>Fecha vinculación:</b>
+                                        <span t-esc="proveedor.date_vinculation"/>
+                                    </p>
+                                    <p class="lead">
+                                        <b>Contacto asociado:</b>
+                                        <span t-esc="proveedor.partner_id.email"/>
+                                        |
+                                        <span t-esc="proveedor.partner_id.phone"/>
+                                    </p>
+                                    <p class="lead">
+                                        <b>Sitio web:</b>
+                                        <span t-esc="proveedor.partner_id.website"/>
+                                    </p>
+                                    <p class="lead">
+                                        <b>Reportes:</b>
+                                    </p>
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Solicitante</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="proveedor.report_ids" t-as="report">
+                                                <td><span t-esc="report.name"/></td>
+                                                <td><span t-esc="report.solicitante"/></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

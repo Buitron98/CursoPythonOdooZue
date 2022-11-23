@@ -41,6 +41,8 @@
         'reports/template_report_proveedores.xml',
         'reports/actions_report_proveedores.xml',
         'templates/index.xml',
+        'templates/edit_proveedor.xml',
+        'templates/show_proveedor.xml',
         'views/menus.xml',
         'data/master_data.xml',
         'data/data_city.xml'

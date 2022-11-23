@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+        <template id="zue_curso.page_edit_proveedor" name="Editar Proveedor">
+            <t t-call="website.layout">
+                <link rel="stylesheet" href="/zue_curso/static/src/css/proveedores.css"/>
+                <div class="col-md-12 block_curso">
+                    <h3>Editar Proveedor</h3>
+                    <div class="row">
+                        <form action="/zue_curso/proveedor/edit_save" method="POST">
+                            <input type="text" class="form-control" t-att-value="proveedor.id"
+                                   id="id" name="id" readonly="1"/>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="complate_name">Nombre completo</label>
+                                    <input type="text" class="form-control"
+                                           t-att-value="proveedor.complate_name"
+                                           id="complate_name" name="complate_name"/>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="value">Valor</label>
+                                    <input type="number" class="form-control"
+                                           t-att-value="proveedor.value"
+                                           id="value" name="value"/>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="type_document">Tipo documento</label>
+                                    <select id="type_document" name="type_document"
+                                            t-att-selected="proveedor.type_document"
+                                            class="form-control">
+                                        <option value="NIT" t-att-selected="proveedor.type_document == 'NIT'">NIT</option>
+                                        <option value="CC" t-att-selected="proveedor.type_document == 'CC'">CC</option>
+                                        <option value="PA" t-att-selected="proveedor.type_document == 'PA'">PA</option>
+                                        <option value="OT" t-att-selected="proveedor.type_document == 'OT'">OT</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="num_document">Número documento</label>
+                                    <input type="text" class="form-control"
+                                           t-att-value="proveedor.num_document"
+                                           id="num_document" name="num_document"/>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="date_vinculation">Fecha Vinculación</label>
+                                    <input type="date" class="form-control"
+                                           t-att-value="proveedor.date_vinculation"
+                                           id="date_vinculation" name="date_vinculation"/>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

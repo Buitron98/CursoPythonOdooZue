@@ -8,20 +8,53 @@ class ZueCurso(Controller):
         if request.env.user:
             name = request.env.user.partner_id.name
 
-        obj_proveedores = request.env['res.partner'].sudo().search([])
+        obj_proveedores = request.env['zue_curso.proveedores'].sudo().search([])
 
         return request.render('zue_curso.index_page',{'name_user':name,
                                                       'obj_proveedores':obj_proveedores})
 
-#     @http.route('/zue_curso/zue_curso/objects', auth='public')
-#     def list(self, **kw):
-#         return http.request.render('zue_curso.listing', {
-#             'root': '/zue_curso/zue_curso',
-#             'objects': http.request.env['zue_curso.zue_curso'].search([]),
-#         })
+    @route('/zue_curso/proveedor/show/<int:id>', auth='user', website=True)
+    def show_proveedor(self, id):
+        obj_proveedor = request.env['zue_curso.proveedores'].sudo().search([('id', '=', id)])
 
-#     @http.route('/zue_curso/zue_curso/objects/<model("zue_curso.zue_curso"):obj>', auth='public')
-#     def object(self, obj, **kw):
-#         return http.request.render('zue_curso.object', {
-#             'object': obj
-#         })
+        return request.render('zue_curso.page_show_proveedor', {'proveedor': obj_proveedor})
+
+    @route('/zue_curso/proveedor/edit/<int:id>', auth='user', website=True)
+    def edit_proveedor(self, id):
+        obj_proveedor = request.env['zue_curso.proveedores'].sudo().search([('id','=',id)])
+
+        return request.render('zue_curso.page_edit_proveedor', {'proveedor': obj_proveedor})
+
+    @route('/zue_curso/proveedor/edit_save', auth='user', website=True, csrf=False)
+    def edit_proveedor_save(self, **kwargs):
+        #Actualizar información
+        dict_values = {
+            'complate_name':kwargs['complate_name'],
+            'value':float(kwargs['value']),
+            'type_document':kwargs['type_document'],
+            'num_document':kwargs['num_document'],
+            'date_vinculation':kwargs['date_vinculation'],
+        }
+        obj_proveedor = request.env['zue_curso.proveedores'].sudo().search([('id', '=', kwargs['id'])])
+        obj_proveedor.write(dict_values)
+        #Enviar a pagina principal
+        if request.env.user:
+            name = request.env.user.partner_id.name
+
+        obj_proveedores = request.env['zue_curso.proveedores'].sudo().search([])
+
+        return request.render('zue_curso.index_page', {'name_user': name,
+                                                       'obj_proveedores': obj_proveedores})
+
+    @route('/zue_curso/proveedor/drop/<int:id>', auth='user', website=True)
+    def drop_proveedor(self, id):
+        obj_proveedor = request.env['zue_curso.proveedores'].sudo().search([('id', '=', id)])
+        obj_proveedor.unlink()
+        # Enviar a pagina principal
+        if request.env.user:
+            name = request.env.user.partner_id.name
+
+        obj_proveedores = request.env['zue_curso.proveedores'].sudo().search([])
+
+        return request.render('zue_curso.index_page', {'name_user': name,
+                                                       'obj_proveedores': obj_proveedores})

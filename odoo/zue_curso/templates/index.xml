@@ -2,22 +2,100 @@
     <data>
         <template id="zue_curso.index_page" name="Index">
             <t t-call="website.layout">
-                <div class="col-md-12">
+                <link rel="stylesheet" href="/zue_curso/static/src/css/proveedores.css"/>
+                <div class="col-md-12 block_curso">
                     <div class="row">
-                        <div class="col-md-2 offset-md-1">
-                            <h3>Proveedores:</h3>
-                        </div>
-                        <div class="col-md-5 offset-md-1">
-                            <ul class="list-group" t-foreach="obj_proveedores" t-as="obj_p">
+                        <div class="col-md-2">
+                            <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    <img t-if="obj_p.image_1920" t-att-src="image_data_uri(obj_p.image_1920)"/>
-                                    <span t-esc="obj_p.name"/>
-<!--                                    <br/>-->
-<!--                                    <span t-esc="obj_p.type_document"/> - <span t-esc="obj_p.num_document"/>-->
-<!--                                    <br/>-->
-<!--                                    <span t-esc="obj_p.date_vinculation"/>-->
+                                    <h4>Proveedores</h4>
+                                </li>
+                                <li class="list-group-item">
+                                    <h4>Clientes</h4>
+                                </li>
+                                <li class="list-group-item">
+                                    <h4>Empleados</h4>
                                 </li>
                             </ul>
+                        </div>
+                        <div class="col-md-10">
+                            <a type="button" class="btn btn-light block_curso"
+                                t-attf-href="/zue_curso/proveedor/create">
+                                <span class="fa fa-address-card"/> Crear
+                            </a>
+                            <div class="card-columns">
+                                <div class="card mb-3" style="max-width: 540px;" t-foreach="obj_proveedores"
+                                     t-as="obj_p">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-4">
+                                            <img t-if="obj_p.partner_id.image_1920" class="img-fluid"
+                                                 t-att-src="image_data_uri(obj_p.partner_id.image_1920)"/>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <span t-esc="obj_p.complate_name"/>
+                                                </h5>
+                                                <p class="card-text">
+                                                    Identificación:
+                                                    <span t-esc="obj_p.type_document"/>
+                                                    -
+                                                    <span t-esc="obj_p.num_document"/>
+                                                    <br/>
+                                                    Tipo:
+                                                    <t t-if="obj_p.type_proveedor == 'a'">
+                                                        Adquiriente
+                                                    </t>
+                                                    <t t-if="obj_p.type_proveedor == 'b'">
+                                                        Prestamista
+                                                    </t>
+                                                    <t t-if="obj_p.type_proveedor == 'c'">
+                                                        Publico
+                                                    </t>
+                                                </p>
+                                                <p class="card-text">
+                                                    <span t-esc="obj_p.date_vinculation"/>
+                                                </p>
+                                                <a type="button" class="btn btn-primary"
+                                                    t-attf-href="/zue_curso/proveedor/show/{{obj_p.id}}">
+                                                    <span class="fa fa-eye"/>
+                                                </a>
+                                                <a type="button" class="btn btn-info"
+                                                    t-attf-href="/zue_curso/proveedor/edit/{{obj_p.id}}">
+                                                    <span class="fa fa-pencil"/>
+                                                </a>
+
+                                                <button type="button" class="btn btn-danger"
+                                                    data-toggle="modal" t-att-data-target="'#delete_Modal_'+str(obj_p.id)">
+                                                    <span class="fa fa-trash"/>
+                                                </button>
+                                                <!--Modal-->
+                                                <div class="modal fade" t-att-id="'delete_Modal_'+str(obj_p.id)" tabindex="-1"
+                                                     role="dialog" t-att-aria-labelledby="'delete_Modal_'+str(obj_p.id)" aria-hidden="true">
+                                                  <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                      <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                        ¿Esta Seguro de eliminar?
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                          <a type="button" class="btn btn-danger"
+                                                            t-attf-href="/zue_curso/proveedor/drop/{{obj_p.id}}">
+                                                            Eliminar
+                                                        </a>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
